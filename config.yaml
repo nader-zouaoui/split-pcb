@@ -1,0 +1,401 @@
+units:
+  px: cx + 2
+  py: cy + 2
+
+  pushX: (cx / 2)
+  pushY: (cy / 2)
+
+  padX: pushX + 2
+  padY: pushY + 2
+
+  pad: 2
+
+  spacing: 0.75
+
+  controllerW: 18.5
+  controllerH: 33.5
+  belowControllerH: 17
+  caseBorder: 1.5
+  screwThreadRadius: 0.5
+  screwPCBRadius: 4.0
+
+points:
+  key:
+    padding: cy + spacing
+    spread: cx + spacing
+
+  zones:
+    matrix:
+      columns:
+        first:
+          key: { stagger: 0, column_net: P5 }
+          rows: { mod: { skip: true } }
+        second:
+          key: { stagger: 0, column_net: P6 }
+          rows: { mod: { skip: true } }
+        third:
+          key: { stagger: 7, column_net: P7 }
+          rows: { mod: { skip: true } }
+        fourth:
+          key: { stagger: 5, column_net: P8 }
+        fifth:
+          key: { stagger: -6, column_net: P9 }
+        sixth:
+          key: { stagger: -3.0, column_net: P4 }
+          rows: { mod: { skip: true } }
+        seventh:
+          key: { stagger: 4, column_net: P10 }
+          rows: { num: { skip: true }, mod: { skip: true } }
+      rows:
+        mod: { row_net: P15 } 
+        bottom: { row_net: P18 } 
+        home: { row_net: P19 }
+        top: { row_net: P20 }
+        num: { row_net: P21 }
+      anchor:
+        shift: [100, -150]
+
+    thumbs:
+      anchor:
+        ref: matrix_sixth_bottom
+        shift: [2, -22]
+      columns:
+        small_thumb:
+          key:
+            {
+              width: 1U,
+              splay: -30,
+              stagger: -5,
+              shift: [3, 0],
+              column_net: P4,
+            }
+        medium_thumb:
+          key:
+            {
+              width: 1.5U,
+              shift: [0, -3],
+              stagger: .25cy,
+              splay: 90,
+              spread: 1.1cx,
+              column_net: P10,
+            }
+        big_thumb:
+          key:
+            {
+              shift: [0, -3],
+              stagger: -1.1cx,
+              width: 1.5U,
+              spread: 0,
+              column_net: P7,
+            }
+      rows:
+        cluster: { row_net: P15 } 
+
+  mirror:
+    ref: matrix_seventh_num
+    distance: 80
+outlines:
+  keysleft:
+    - what: rectangle
+      where: "/^matrix|^thumbs/"
+      size: [14, 14]
+      fillet: 0
+  keysright:
+    - what: rectangle
+      where: "/^mirror/"
+      size: [14, 14]
+      fillet: 0
+
+  board_left:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: matrix_first_num
+          shift: [-padX-2pad, padY+pad]
+        - ref: matrix_second_num
+          shift: [pushX - pad, padY+pad]
+        - ref: matrix_third_num
+          shift: [-pushX - pad, padY+pad]
+        - ref: matrix_third_num
+          shift: [pushX - pad, padY+pad]
+        - ref: matrix_fourth_num
+          shift: [-pushX - pad, padY+pad]
+        - ref: matrix_fourth_num
+          shift: [padX, padY+pad]
+        - ref: matrix_fifth_num
+          shift: [-pushX + pad, padY+pad]
+        - ref: matrix_fifth_num
+          shift: [padX, padY+pad]
+        - ref: matrix_sixth_num
+          shift: [-pushX + pad + 0.0001, padY+pad]
+        - ref: matrix_sixth_num
+          shift: [padX, padY+pad]
+        - ref: matrix_seventh_top
+          shift: [-pushX + pad, padY+pad]
+        - ref: matrix_seventh_top
+          shift: [4padX, padY+pad]
+        - ref: matrix_seventh_bottom
+          shift: [4padX, -padY]
+
+
+
+        - ref: thumbs_medium_thumb_cluster
+          shift: [2.8padX, -2.8padY-3pad]
+
+        - ref: thumbs_big_thumb_cluster
+          shift: [2padX, -padY-3pad]
+        - ref: thumbs_big_thumb_cluster
+          shift: [-padX -4pad, -padY -3pad]
+
+        - ref: thumbs_big_thumb_cluster
+          shift: [-padX - 4pad, padY]
+
+        - ref: matrix_fourth_mod
+          shift: [pushX - 5pad, -padY -5pad]
+        - ref: matrix_fourth_mod
+          shift: [-pushX -2pad, -padY -3pad]
+
+   
+        - ref: matrix_first_bottom
+          shift: [-padX-2pad, -padY-3pad]
+
+        - ref: matrix_first_num
+          shift: [-padX-2pad, padY]
+
+  board_right:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: mirror_matrix_first_num
+          shift: [-padX-2pad, padY+pad]
+        - ref: mirror_matrix_second_num
+          shift: [pushX - pad, padY+pad]
+        - ref: mirror_matrix_third_num
+          shift: [-pushX - pad, padY+pad]
+        - ref: mirror_matrix_third_num
+          shift: [pushX - pad, padY+pad]
+        - ref: mirror_matrix_fourth_num
+          shift: [-pushX - pad, padY+pad]
+        - ref: mirror_matrix_fourth_num
+          shift: [padX, padY+pad]
+        - ref: mirror_matrix_fifth_num
+          shift: [-pushX + pad, padY+pad]
+        - ref: mirror_matrix_fifth_num
+          shift: [padX, padY+pad]
+        - ref: mirror_matrix_sixth_num
+          shift: [-pushX + pad + 0.0001, padY+pad]
+        - ref: mirror_matrix_sixth_num
+          shift: [padX, padY+pad]
+        - ref: mirror_matrix_seventh_top
+          shift: [-pushX + pad, padY+pad]
+        - ref: mirror_matrix_seventh_top
+          shift: [4padX, padY+pad]
+        - ref: mirror_matrix_seventh_bottom
+          shift: [4padX, -padY]
+
+
+
+        - ref: mirror_thumbs_medium_thumb_cluster
+          shift: [2.8padX, -2.8padY-3pad]
+
+        - ref: mirror_thumbs_big_thumb_cluster
+          shift: [2padX, -padY-3pad]
+        - ref: mirror_thumbs_big_thumb_cluster
+          shift: [-padX -4pad, -padY -3pad]
+
+        - ref: mirror_thumbs_big_thumb_cluster
+          shift: [-padX - 4pad, padY]
+
+        - ref: mirror_matrix_fourth_mod
+          shift: [pushX - 5pad, -padY -5pad]
+        - ref: mirror_matrix_fourth_mod
+          shift: [-pushX -2pad, -padY -3pad]
+
+   
+        - ref: mirror_matrix_first_bottom
+          shift: [-padX-2pad, -padY-3pad]
+
+        - ref: mirror_matrix_first_num
+          shift: [-padX-2pad, padY]
+
+  leftcutout:
+    - name: board_left
+    - operation: subtract
+      name: keysleft
+  rightcutout:
+    - name: board_right
+    - operation: subtract
+      name: keysright
+pcbs:
+  board_left:
+    template: kicad8
+    outlines:
+      main:
+        outline: board_left
+    footprints:
+      keyswitches:
+        where: "/^matrix|^thumbs/"
+        what: ceoloide/switch_gateron_ks27_ks33
+        params:
+          hotswap: true
+          include_keycap: true
+          from: "{{column_net}}"
+          solder: false
+          to: "{{colrow}}"
+      diodes:
+        where: "/^matrix|^thumbs/"
+        what: diode
+        params:
+          from: "{{colrow}}"
+          to:  "{{row_net}}"
+        adjust:
+          shift: [6, 2]
+          rotate: -90
+      promicro:
+        what: promicro
+        where:
+          ref: matrix_seventh_top
+          shift: [1.1U, -6]
+          rotate: -90
+        params:
+          orientation: up
+      trrs:
+        what: ceoloide/trrs_pj320a
+        where:
+          ref: matrix_seventh_top
+          shift: [2U, 10.5] 
+        params:
+          SL: GND
+          TP: VCC
+          R1: P2
+          R2: P3
+      oled:
+        what: ceoloide/display_ssd1306
+        where:
+          ref: matrix_seventh_top
+          shift: [1.1U, -8]     
+        params:
+          SDA: P2               # Pro Micro Pin 2 (SDA)
+          SCL: P3               # Pro Micro Pin 3 (SCL)
+          VCC: VCC
+          GND: GND
+      mounting_holes:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: matrix_second_top
+            shift: [-0.5cx, 0.4cy]
+      mounting_holes2:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: matrix_second_home
+            shift: [-0.5cx, -0.6cy] 
+      mounting_holes3:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: matrix_sixth_home
+            shift: [-0.5cx, -0.6cy]
+      mounting_holes4:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: matrix_sixth_num
+            shift: [-0.5cx, -0.6cy] 
+      mounting_holes5:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: thumbs_medium_thumb_cluster
+            shift: [1.1cx, 0.3cy] 
+  board_right:
+    template: kicad8
+    outlines:
+      main:
+        outline: board_right
+    footprints:
+      keyswitches:
+        where: "/^mirror/"
+        what: ceoloide/switch_gateron_ks27_ks33
+        params:
+          hotswap: true
+          include_keycap: true
+          solder: false
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diodes:
+        where: "/^mirror/"
+        what: diode
+        params:
+          from: "{{colrow}}"
+          to:  "{{row_net}}"
+        adjust:
+          shift: [-6, 2]
+          rotate: 90
+
+      promicro:
+        what: promicro
+        params:
+          orientation: up
+        where:
+          ref: mirror_matrix_seventh_top
+          shift: [1.1U, -6]
+          rotate: 90
+          
+      trrs:
+        what: ceoloide/trrs_pj320a
+        where:
+          ref: mirror_matrix_seventh_top
+          shift: [2U, 10.5] 
+        params:
+          SL: GND
+          TP: VCC
+          R1: P2
+          R2: P3
+      oled:
+        what: ceoloide/display_ssd1306
+        where:
+          ref: mirror_matrix_seventh_top
+          shift: [1.1U, -8]     
+        params:
+          SDA: P2               # Pro Micro Pin 2 (SDA)
+          SCL: P3               # Pro Micro Pin 3 (SCL)
+          VCC: VCC
+          GND: GND
+      mounting_holes:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: mirror_matrix_second_top
+            shift: [-0.5cx, 0.4cy]
+      mounting_holes2:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: mirror_matrix_second_home
+            shift: [-0.5cx, -0.6cy] 
+      mounting_holes3:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: mirror_matrix_sixth_home
+            shift: [-0.5cx, -0.6cy] 
+      mounting_holes4:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: mirror_matrix_sixth_num
+            shift: [-0.5cx, -0.6cy] 
+      mounting_holes5:
+        what: ceoloide/mounting_hole_npth
+        where:
+          - ref: mirror_thumbs_medium_thumb_cluster
+            shift: [1.1cx, 0.3cy] 
+
+cases:
+  plate_left:
+    - name: leftcutout
+      extrude: 1.2
+  plate_right:
+    - name: rightcutout
+      extrude: 1.2
+  bottom_left:
+    - name: board_left
+      extrude: 1.2
+  bottom_right:
+    - name: board_right
+      extrude: 1.2
